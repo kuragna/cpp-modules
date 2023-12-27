@@ -4,7 +4,7 @@ CC			=	c++
 CPPFLAGS	=	-Wall -Werror -Wextra
 RM			=	rm -fr
 
-SRC			=	tests.cpp account.cpp
+SRC			=	tests.cpp Account.cpp
 
 all: $(NAME)
 

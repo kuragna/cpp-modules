@@ -5,27 +5,26 @@ int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
+#define INFO() std::cout << __FILE__ << ":" << __LINE__ << " `" << __FUNCTION__ << "` -> "
 
-
+// TODO: Destructor
 
 Account::Account(int initial_deposit)
 {
     (void) initial_deposit;
     _accountIndex = _nbAccounts;
     _amount = initial_deposit;
-    _totalAmount = _amount;
+    _totalAmount += _amount;
     _nbDeposits = 0;
     _nbWithdrawals = 0;
     _nbAccounts += 1;
 
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "index:" << _accountIndex;
-    std::cout << ";amount" << _amount;
+    std::cout << ";amount:" << _amount;
     std::cout << ";created\n";
 }
 Account::~Account(void)
 {
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "index:" << _accountIndex;
     std::cout << ";amount:" << _amount;
     std::cout << ";closed\n";
@@ -33,27 +32,32 @@ Account::~Account(void)
 
 void    Account::makeDeposit(int deposit)
 {
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "index:" << _accountIndex;
     std::cout << ";p_amount:" << _amount;
     std::cout << ";deposit:" << deposit;
     _amount += deposit;
     std::cout << ";amount:" << _amount;
     _nbDeposits += 1;
+    _totalNbDeposits += 1;
     _totalAmount += deposit;
     std::cout << ";nb_deposits:" << _nbDeposits << std::endl; 
-    (void) deposit;
 };
 
 bool    Account::makeWithdrawal(int withdrawal)
 {
     (void) withdrawal;
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "index:" << _accountIndex;
     std::cout << ";p_amount:" << _amount;
+    if (checkAmount() < withdrawal)
+    {
+        std::cout << ";withdrawal:refused\n";
+        return false;
+    }
     std::cout << ";withdrawal:" << withdrawal;
     _amount -= withdrawal;
+    _totalAmount -= withdrawal;
     _nbWithdrawals += 1;
+    _totalNbWithdrawals += 1;
     std::cout << ";amount:" << _amount;
     std::cout << ";nb_withdrawals:" << _nbWithdrawals << std::endl;
     return true;
@@ -61,13 +65,11 @@ bool    Account::makeWithdrawal(int withdrawal)
 
 int Account::checkAmount(void) const
 {
-    std::cout << "`" << __FUNCTION__ << "`\n";
-    return 1;
+    return _amount;
 };
 
 void    Account::displayStatus(void) const
 {
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "index:" << _accountIndex;
     std::cout << ";amount:" << _amount;
     std::cout << ";deposits:" << _nbDeposits;
@@ -76,7 +78,6 @@ void    Account::displayStatus(void) const
 
 void    Account::displayAccountsInfos(void)
 {
-    std::cout << "`" << __FUNCTION__ << "` -> ";
     std::cout << "accounts:" << getNbAccounts();
     std::cout << ";total:" << getTotalAmount();
     std::cout << ";deposits:" << getNbDeposits();
