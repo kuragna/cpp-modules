@@ -1,7 +1,7 @@
 NAME		=	weapon
 
 CC			=	c++
-CPPFLAGS	=	-Wall -Werror -Wextra
+CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -fr
 
 SRC			=	main.cpp Weapon.cpp HumanA.cpp HumanB.cpp

@@ -3,7 +3,7 @@
 
 HumanA::HumanA(std::string _name, Weapon &_weapon) : weapon(_weapon)
 {
-    name   = _name;
+    name = _name;
 }
 
 void    HumanA::attack(void)
