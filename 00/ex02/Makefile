@@ -1,18 +1,17 @@
 NAME		=	account
-
-CC			=	c++
+CC			=	g++
 CPPFLAGS	=	-Wall -Werror -Wextra
 RM			=	rm -fr
-
 SRC			=	tests.cpp Account.cpp
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	$(CC) -o $@ $(CPPFLAGS) $^
+$(NAME): $(SRC) Account.hpp
+	$(CC) -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
 
 fclean:
-	$(RM) $(NAME)
+	$(RM) $<
+
 re: fclean all
 
 .PHONY: all fclean re
