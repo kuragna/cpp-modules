@@ -1,42 +1,67 @@
 #include <iostream>
 #include <fstream>
 
-int main(int argc, char **argv)
+bool	replace(std::string filename, std::string s1, std::string s2)
 {
-    std::ifstream   infile;
-    std::ofstream   outfile;
-    std::string     line;
-    std::string     filename;
-    
+	std::ifstream infile;
+	std::ofstream outfile;
+
+	if (s1.empty())
+	{
+		std::cerr << "Error: string1 may not be empty" << std::endl;
+		return false;
+	}
+	infile.open(filename);
+	if (!infile.is_open())
+	{
+		std::cerr << "Error: could not open: " << filename << std::endl;
+		return false;
+	}
+
+	filename += ".replace";
+	outfile.open(filename);
+	if (!outfile.is_open())
+	{
+		std::cerr << "Error: could not open: " << filename << std::endl;
+		return false;
+	}
+
+	std::string line;
+	while (std::getline(infile, line))
+	{
+		if (infile.fail())
+		{
+			std::cerr << "Error: could not read input" << std::endl;
+			return false;
+		}
+		int	pos = line.find(s1);
+		std::cout << "Pos: " << "`" << pos << "`" << std::endl;
+		while (pos != -1)
+		{
+			outfile << line.substr(0, pos);
+			outfile << s2;
+			line = line.substr(pos + s1.length());
+			pos = line.find(s1);
+		}
+		if (pos == -1)
+			outfile << line;
+		outfile << std::endl;
+	}
+	infile.close();
+	outfile.close();
+	return true;
+}
+
+
+int	main(int argc, char **argv)
+{
     if ((argc - 1) != 3)
     {
-        std::cerr << "Error: invalid arguments\n";
-        std::cout << "Usage: ./sed filename string1 string2\n";
+        std::cerr << "Error: invalid argument" << std::endl;
+        std::cerr << "Usage: ./sed filename string1 string2" << std::endl;
         return 1;
-    }
-    infile.open(argv[1]); 
-    if (!infile.is_open())
-    {
-        std::cerr << "Error: could not open " << argv[1] << std::endl;
-        return 1;
-    }
-    filename = argv[1];
-    outfile.open(filename + ".replace");
-    if (!outfile.is_open())
-    {
-        std::cerr << "Error: could not open " << argv[1] << ".replace" << std::endl;
-        return 1;
-    }
-    while (std::getline(infile, line))
-    {
-        //std::cout << line << std::endl;
-        if (line == argv[2])
-            outfile.write(argv[3], std::strlen(argv[3]));
-        else
-            outfile.write(line.c_str(), line.length());
-        outfile.write("\n", 1);
-    }
-    infile.close();
-    outfile.close();
-    return 0;
+	}
+	if (!replace(argv[1], argv[2], argv[3]))
+		return 1;
+	return 0;
 }
