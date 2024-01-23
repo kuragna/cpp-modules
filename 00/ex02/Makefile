@@ -1,6 +1,6 @@
 NAME		=	account
 CC			=	g++
-CPPFLAGS	=	-Wall -Werror -Wextra
+CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -fr
 SRC			=	tests.cpp Account.cpp
 
@@ -10,7 +10,7 @@ $(NAME): $(SRC) Account.hpp
 	$(CC) -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
 
 fclean:
-	$(RM) $<
+	$(RM) $(NAME)
 
 re: fclean all
 

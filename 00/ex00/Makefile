@@ -1,9 +1,6 @@
 NAME = megaphone
-
-FLAGS = -Wall -Werror -Wextra -std=c++98
-
+FLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 CPP   = c++
-
 RM	  = rm -fr
 
 all: $(NAME)

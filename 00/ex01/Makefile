@@ -3,7 +3,7 @@ CPP		= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 RM		= rm -fr
 
-SRC		= PhoneBook.cpp
+SRC		= PhoneBook.cpp Contact.cpp main.cpp
 
 all: $(NAME)
 
