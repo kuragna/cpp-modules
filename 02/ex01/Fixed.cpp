@@ -1,76 +1,58 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed(void)
 {
-	i = 0;
-	f = 0.0;
-	std::cout << "Default constructor called\n";
+	std::cout << "Default constructor called" << std::endl;
+	nb = 0;
 }
 
-Fixed::Fixed(const int _i)
+Fixed::Fixed(const int _nb)
 {
-	i = _i;
-	f = 0.0;
-	std::cout << "Int constructor called\n";
+	std::cout << "Int constructor called" << std::endl;
+	nb = _nb * (1 << bits);
 }
 
-Fixed::Fixed(const float _f)
+Fixed::Fixed(const float _nb)
 {
-	f = _f;
-	i = 0;
-	std::cout << "Float constructor called\n";
+	std::cout << "Float constructor called" << std::endl;
+	nb = std::roundf(_nb * (1 << bits));
 }
 
 Fixed::Fixed(const Fixed &fixed)
 {
-	i = fixed.i;
-	f = fixed.f;
-	std::cout << "Copy constructor called\n";
+	std::cout << "Copy constructor called" << std::endl;
+	nb = fixed.nb;
 }
 
-Fixed	&Fixed::operator=(Fixed const &fixed)
+Fixed	&Fixed::operator=(const Fixed &fixed)
 {
-	i = fixed.i;
-	f = fixed.f;
-	std::cout << "Copy assignment operator called\n";
+	std::cout << "Copy assignment operator called" << std::endl;
+	nb = fixed.nb;
 	return *this;
 }
 
-std::ostream	&operator<<(std::ostream &os, Fixed const &fixed)
+Fixed::~Fixed(void)
 {
-	// TODO: fix zero value
-	if (fixed.i == 0)
-		std::cout << fixed.f * 1.0;
-	else
-		std::cout << fixed.i;
-	return os;
-}
-
-Fixed::~Fixed()
-{
-	std::cout << "Destructor called\n";
-}
-
-void	Fixed::setRawBits(int const raw)
-{
-	i = raw;
-	std::cout << "setRawBits member function called\n";
-}
-
-int		Fixed::getRawBits(void) const
-{
-	std::cout << "getRawBits member function called\n";
-	return i;
+	std::cout << "Destructor called" << std::endl;
 }
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)i / (float)(1 << b));
+	return ((float)nb) / (1 << bits);
 }
 
 int		Fixed::toInt(void) const
 {
-	if (i == 0)
-		return roundf(f);
-	return i;
+	return nb / (1 << bits);
+}
+
+int	Fixed::getRawBits(void) const
+{
+	return nb;
+}
+
+std::ostream	&operator<<(std::ostream &os, const Fixed &fixed)
+{
+	os << (float)fixed.toFloat();
+	return os;
 }
