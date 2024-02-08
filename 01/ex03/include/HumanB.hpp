@@ -1,7 +1,7 @@
-#ifndef HUMAN_B_H
-#define HUMAN_B_H
+#ifndef HUMAN_B_HPP
+#define HUMAN_B_HPP
 
-#include "Weapon.hpp"
+#include "./Weapon.hpp"
 
 class   HumanB
 {
@@ -11,8 +11,9 @@ class   HumanB
     HumanB(std::string _name)
     {
         name = _name;
+		weapon = 0;
     };
     void    attack(void);
     void    setWeapon(Weapon &_weapon);
 };
-#endif //HUMAN_B_H
+#endif //HUMAN_B_HPP

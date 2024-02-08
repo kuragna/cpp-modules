@@ -1,7 +1,7 @@
-#ifndef HUMAN_A_H
-#define HUMAN_A_H
+#ifndef HUMAN_A_HPP
+#define HUMAN_A_HPP
 
-#include "Weapon.hpp"
+#include "./Weapon.hpp"
 
 class   HumanA
 {
@@ -12,4 +12,4 @@ class   HumanA
     void    attack(void);
 };
 
-#endif //HUMAN_A_H
+#endif //HUMAN_A_HPP

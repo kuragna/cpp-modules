@@ -1,4 +1,15 @@
-unix is great os. unix is opensource. unix is free os.
-learn operating system.
-unix linux which one you choose.
-unix is easy to learn.unix is a multiuser os.Learn unix .unix is a powerful.
+Unix was originally meant to be a convenient platform for programmers developing software to be run on it and on other systems
+, rather than for non-programmers.
+The system grew larger as the operating system started spreading in academic circles,
+and as users added their own tools to the system and shared them with colleague.
+At first, Unix was not designed to be portable[6] or for multi-tasking.
+Later, Unix gradually gained portability, multi-tasking and multi-user capabilities in a time-sharing configuration.
+Unix systems are characterized by various concepts:
+the use of plain text for storing data;
+a hierarchical file system;
+treating devices and certain types of inter-process communication (IPC) as files;
+and the use of a large number of software tools,
+small programs that can be strung together through a command-line interpreter using pipes,
+as opposed to using a single monolithic program that includes all of the same functionality.
+These concepts are collectively known as the "Unix philosophy".
+Brian Kernighan and Rob Pike summarize this in The Unix Programming Environment as "the idea that the power of a system comes more from the relationships among programs than from the programs themselves".

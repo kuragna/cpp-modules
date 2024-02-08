@@ -1,20 +1,53 @@
 #include "Harl.hpp"
 
+void    Harl::debug(void)
+{
+	std::cerr << "DEBUG:" << std::endl;
+	std::cerr << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger" << std::endl;
+	std::cerr << "I really do!" << std::endl;
+};
 
-typedef void    (Harl::*fptr)(void);
+void    Harl::info(void)
+{
+	std::cerr << "INFO:" << std::endl;
+	std::cerr << "I cannot believe adding extra bacon costs more money." << std::endl;
+	std::cerr << "You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!" << std::endl;
+};
+
+void    Harl::warning(void)
+{
+	std::cerr << "WARNING:" << std::endl;
+	std::cerr << "I think I deserve to have some extra bacon for free." << std::endl;
+	std::cerr << "I've been coming for years whereas you started working here since last month." << std::endl;
+};
+
+void    Harl::error(void)
+{
+	std::cerr << "ERROR:" << std::endl;
+	std::cerr << "This is unacceptable! I want to speak to the manager now." << std::endl;
+};
+
+int	getIndex(std::string level)
+{
+	std::string	levels[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
+
+	for (int i = 0; i < 4; i += 1)
+	{
+		if (levels[i] == level)
+			return i;
+	}
+	return -1;
+}
 
 void    Harl::complain(std::string level)
 {
-    int     idx;
-    Harl    harl;
-    fptr    methods[4] = {
-        &Harl::debug,
-        &Harl::info,
-        &Harl::warning,
-        &Harl::error,
-    };
-    
-    idx = stoi(level);
-    if (idx >= 1 && idx <= 4)
-        (harl.*methods[idx - 1])();
+	int		index;
+	fptr    methods[4] = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
+
+
+	index = getIndex(level);
+	if (index != -1)
+	{
+		(this->*methods[index])();
+	}
 }

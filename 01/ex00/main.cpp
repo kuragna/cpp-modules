@@ -1,16 +1,20 @@
+
 #include "Zombie.hpp"
 
 int main()
 {
-
-    Zombie *z = newZombie("ahmed");
+    Zombie	*z = newZombie("bar");
     z->announce();
 
-    delete z;
+	Zombie *z2 = newZombie("foo");
+	z2->announce();
 
-    randomChump("foo");
-    randomChump("bar");
-    randomChump("baz");
+
+	delete z;
+	delete z2;
+
+    randomChump("test");
+    randomChump("test2");
 
     return 0;
 }
