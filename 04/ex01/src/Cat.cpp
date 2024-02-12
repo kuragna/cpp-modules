@@ -3,6 +3,7 @@
 Cat::Cat(void) : Animal()
 {
 	std::cout << "Cat defualt constructor called" << std::endl;
+	brain = new Brain();
 }
 
 Cat::Cat(const std::string &type)
@@ -27,12 +28,13 @@ Cat	&Cat::operator=(const Cat &cat)
 
 void	Cat::makeSound(void) const
 {
-	// meow
-	std::cout << "[sound]: Meow.. Meow.. Meow..!" << std::endl;
+	//meow
+	std::cout << "[sound]: Meaw.. Meaw.. Meaw..!" << std::endl;
 }
 
 Cat::~Cat(void)
 {
+	delete brain;
 	std::cout << "Cat destructor called" << std::endl;
 }
 
