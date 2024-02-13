@@ -2,22 +2,25 @@
 
 Brain::Brain(void)
 {
-	std::cout << "Brain defualt constructor called" << std::endl; 
+	std::cout << "Brain defualt constructor called" << std::endl;
 }
 
 Brain::Brain(const Brain &brain)
 {
-	(void) brain;
 	std::cout << "Brain constructor called" << std::endl;
-	// TODO: copy brain.ideas to ideas
-	//ideas = brain.ideas;
+	for (size_t i = 0; i < 100; i += 1)
+	{
+		ideas[i] = brain.ideas[i];
+	}
 }
 
 Brain	&Brain::operator=(const Brain &brain)
 {
-	(void) brain;
 	std::cout << "Brain assignment operator called" << std::endl;
-	//ideas = brean.ideas;
+	for (size_t i = 0; i < 100; i += 1)
+	{
+		ideas[i] = brain.ideas[i];
+	}
 	return *this;
 }
 

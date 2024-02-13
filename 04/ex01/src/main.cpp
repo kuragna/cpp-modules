@@ -7,8 +7,6 @@ void	leaks(void)
 	system("leaks -q a.out");
 }
 
-// TODO: shallow copy and deep copy
-
 int	main(void)
 {
 	atexit(leaks);

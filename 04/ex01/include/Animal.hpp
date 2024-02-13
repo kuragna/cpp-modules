@@ -11,8 +11,8 @@ public:
 	Animal(void);
 	Animal(const Animal &animal);
 	Animal	&operator=(const Animal &animal);
-	virtual ~Animal(void);
 	const std::string &getType(void) const;
+	virtual ~Animal(void);
 	virtual void	makeSound(void) const;
 };
 #endif // ANIMAL_HPP
