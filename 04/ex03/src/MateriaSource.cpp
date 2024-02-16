@@ -4,65 +4,56 @@
 
 MateriaSource::MateriaSource(void)
 {
-	for (int i = 0; i < 4; i += 1)
+	for (int i = 0; i < materias_size; i += 1)
 	{
 		materias[i] = 0;
 	}
-	std::cout << "MateriaSource defualt constructor called" << std::endl;	
+	materias_len = 0;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &ms)
 {
-	std::cout << "MateriaSource constructor called" << std::endl;	
-	for (int i = 0; i < 4; i += 1)
+	for (int i = 0; i < materias_len && i < materias_size; i += 1)
 	{
-		materias[i] = ms.materias[i];
+		materias[i] = ms.materias[i]->clone();
 	}
-	// TODO: memory leaks
+	materias_len = ms.materias_len;
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 {
-	std::cout << "MateriaSource assignemnt operator called" << std::endl;
-	// TODO: memory leaks
-	for (int i = 0; i < 4; i += 1)
+	for (int i = 0; i < materias_len && i < materias_size; i += 1)
 	{
-		materias[i] = ms.materias[i];
+		materias[i] = ms.materias[i]->clone();
 	}
+	materias_len = ms.materias_len;
 	return *this;
 }
 
+
 void	MateriaSource::learnMateria(AMateria *am)
 {
-	int i;
-
-	for (i = 0; i < 4; i += 1)
+	if (materias_len < materias_size)
 	{
-		if (!materias[i]) break ;
+		materias[materias_len] = am;
+		materias_len += 1;
 	}
-	materias[i] = am;
 }
 
 AMateria	*MateriaSource::createMateria(std::string const &type)
 {
-	AMateria *am = 0;
-	if (type == "ice")
+	for (int i = 0; i < materias_len; i += 1)
 	{
-		am = new Ice(type);
+		if (materias[i]->getType() == type)
+			return materias[i]->clone();
 	}
-	else if (type == "cure")
-	{
-		am = new Cure(type);
-	}
-	std::cout << "address: `" << am << "` -> " << __FILE__ ":" << __LINE__ << std::endl;
-	return am;
+	return 0;
 }
 
 MateriaSource::~MateriaSource(void)
 {
-	for (int i = 0; i < 4; i += 1)
+	for (int i = 0; i < materias_len && i < materias_size; i += 1)
 	{
 		delete materias[i];
 	}
-	std::cout << "MateriaSource destructor called" << std::endl;
 };

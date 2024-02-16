@@ -5,7 +5,9 @@
 
 class MateriaSource : virtual public IMateriaSource
 {
-	AMateria *materias[4];
+	static const int materias_size = 4;
+	int	materias_len;	
+	AMateria *materias[materias_size];
 public:
 
 	MateriaSource(void);

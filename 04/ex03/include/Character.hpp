@@ -7,6 +7,7 @@
 class Character : virtual public ICharacter
 {
 	static const int   slots_size = 4;
+	int			slots_len;
 	AMateria	*slots[slots_size];
 	std::string name;
 public:

@@ -2,40 +2,40 @@
 
 Character::Character(void)
 {
-	std::cout << "Character defualt constructor called" << std::endl;
-	for (int i = 0; i < 4; i += 1)
-	{
-		slots[i] = 0;
-	}
-}
-
-Character::Character(const std::string &name)
-{
-	std::cout << "Character constructor called" << std::endl;
 	for (int i = 0; i < slots_size; i += 1)
 	{
 		slots[i] = 0;
 	}
+	slots_len = 0;
+}
+
+Character::Character(const std::string &name)
+{
+	for (int i = 0; i < slots_size; i += 1)
+	{
+		slots[i] = 0;
+	}
+	slots_len = 0;
 	this->name = name;
 }
 
 Character::Character(const Character &ch)
 {
-	std::cout << "Character copy constructor called" << std::endl;
 	name = ch.name;
-	for (int i = 0; i < slots_size; i += 1)
+	slots_len = ch.slots_len;
+	for (int i = 0; i < ch.slots_len && i < slots_size; i += 1)
 	{
-		slots[i] = ch.slots[i];
+		slots[i] = ch.slots[i]->clone();
 	}
 }
 
 Character	&Character::operator=(const Character &ch)
 {
-	std::cout << "Character assigment operator called" << std::endl;
 	name = ch.name;
-	for (int i = 0; i < slots_size; i += 1)
+	slots_len = ch.slots_len;
+	for (int i = 0; i < ch.slots_len && i < slots_size; i += 1)
 	{
-		slots[i] = ch.slots[i];
+		slots[i] = ch.slots[i]->clone();
 	}
 	return *this;
 }
@@ -47,21 +47,19 @@ std::string const &Character::getName(void) const
 
 void	Character::equip(AMateria *m)
 {
-	int i;
-
-	for (i = 0; i < slots_size; i += 1)
+	if (slots_len < slots_size)
 	{
-		if (!slots[i]) break ;
+		slots[slots_len] = m;
+		slots_len += 1;
 	}
-	if (i != slots_size) slots[i] = m;
 }
 
 void	Character::unequip(int idx)
 {
-	if (idx >= 0 && idx <= slots_size)
+	if (idx >= 0 && idx < slots_len)
 	{
-		if (!slots[idx]) return ;
-		// TODO: logic of unequip materia
+		std::cout << "index: " << idx << std::endl;
+		slots[idx] = 0;
 	}
 }
 
@@ -75,11 +73,8 @@ void	Character::use(int idx, ICharacter &target)
 
 Character::~Character(void)
 {
-	for (int i = 0; i < slots_size; i += 1)
+	for (int i = 0; i < slots_len && i < slots_size; i += 1)
 	{
-		if (slots[i])
-			delete slots[i];
+		delete slots[i];
 	}
-	std::cout << "Character destructor called" << std::endl;
 }
-

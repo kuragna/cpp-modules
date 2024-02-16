@@ -1,9 +1,6 @@
 #include "../include/AMateria.hpp"
 
-AMateria::AMateria(void)
-{
-	std::cout << "AMateria defualt constructor called" << std::endl;
-}
+AMateria::AMateria(void) {}
 
 AMateria::AMateria(const AMateria &aMateria)
 {
@@ -31,8 +28,5 @@ void	AMateria::use(ICharacter &target)
 	std::cout << target.getName() << std::endl;
 }
 
-AMateria::~AMateria(void)
-{
-	std::cout << "AMateria destructor called" << std::endl;
-}
+AMateria::~AMateria(void) {}
 
