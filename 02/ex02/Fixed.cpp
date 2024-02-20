@@ -17,7 +17,7 @@ Fixed::Fixed(const float _nb)
 
 Fixed::Fixed(const Fixed &fixed)
 {
-	nb = fixed.nb;
+	operator=(fixed);
 }
 
 Fixed	&Fixed::operator=(const Fixed &fixed)
@@ -113,7 +113,7 @@ Fixed	&Fixed::min(Fixed &f1, Fixed &f2)
 
 Fixed	&Fixed::max(Fixed &f1, Fixed &f2)
 {
-	return (f1 > f2) ? f2 : f2;
+	return (f2 > f1) ? f2 : f1;
 }
 
 Fixed	&Fixed::min(const Fixed &f1, const Fixed &f2)
