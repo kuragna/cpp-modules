@@ -10,25 +10,27 @@ Cat::Cat(const std::string &type)
 {
 	std::cout << "Cat constructor called" << std::endl;
 	this->type = type;
+	brain      = new Brain();
 }
 
 Cat::Cat(const Cat &cat) : Animal(cat)
 {
-	std::cout << "Cat constructor called" << std::endl;
-	type = cat.type;
+	std::cout << "Cat copy constructor called" << std::endl;
+	type  = cat.type;
+	brain = new Brain(*cat.brain);
 }
 
 Cat	&Cat::operator=(const Cat &cat)
 {
 	Animal::operator=(cat);
 	std::cout << "Cat assignemnt operator called" << std::endl;
-	type = cat.type;
+	type 	= cat.type;
+	*brain	= *cat.brain;
 	return *this;
 }
 
 void	Cat::makeSound(void) const
 {
-	//meow
 	std::cout << "[sound]: Meaw.. Meaw.. Meaw..!" << std::endl;
 }
 

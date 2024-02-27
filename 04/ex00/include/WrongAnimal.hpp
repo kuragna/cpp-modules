@@ -5,8 +5,10 @@
 
 class WrongAnimal
 {
+	std::string type;
 public:
 	WrongAnimal(void);	
+	WrongAnimal(const std::string &type);
 	WrongAnimal(const WrongAnimal &wa);	
 	WrongAnimal &operator=(const WrongAnimal &wa);	
 	~WrongAnimal(void);

@@ -3,8 +3,6 @@
 #include "../include/Cat.hpp"
 #include "../include/WrongCat.hpp"
 
-// TODO: check for memory leaks
-
 int	main(void)
 {
 	const Animal *meta = new Animal();
@@ -18,14 +16,23 @@ int	main(void)
 	j->makeSound();
 	meta->makeSound();
 
+	delete meta;
+	delete j;
+	delete i;
+
 
 	/* ---------------------------------------------------- */
+	std::cout << "-------------------------------" << std::endl;
 
-	WrongAnimal *wa  = new WrongAnimal();
-	WrongAnimal *wa2 = new WrongCat();
 
-	wa->makeSound();
-	wa2->makeSound();
+	WrongAnimal *wAnimal = new WrongAnimal();
+	WrongAnimal *w = new WrongCat();
+
+	wAnimal->makeSound();
+	w->makeSound();
+
+	delete wAnimal;
+	delete w;
 
 
 	return 0;

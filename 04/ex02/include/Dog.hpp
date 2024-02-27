@@ -13,6 +13,7 @@ public:
 	Dog(const Dog &dog);
 	Dog	&operator=(const Dog &dog);
 	~Dog(void);
+
 	void	makeSound(void) const;
 };
 #endif // DOG_HPP

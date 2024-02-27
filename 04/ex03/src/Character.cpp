@@ -47,18 +47,24 @@ std::string const &Character::getName(void) const
 
 void	Character::equip(AMateria *m)
 {
+	int i;
+
 	if (slots_len < slots_size)
 	{
-		slots[slots_len] = m;
-		slots_len += 1;
+		slots[slots_len++] = m;
+		return ;
 	}
+	for (i = 0; i < slots_size; i += 1)
+	{
+		if (!slots[i]) break ;
+	}
+	slots[i] = m;
 }
 
 void	Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < slots_len)
 	{
-		std::cout << "index: " << idx << std::endl;
 		slots[idx] = 0;
 	}
 }

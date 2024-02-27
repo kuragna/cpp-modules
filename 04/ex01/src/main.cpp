@@ -10,8 +10,9 @@ void	leaks(void)
 int	main(void)
 {
 	atexit(leaks);
-	const Animal *j = new Dog();
-	const Animal *i = new Cat();
+
+	const Animal *j = new Dog("Dog");
+	const Animal *i = new Cat("Cat");
 
 	delete j;
 	delete i;
@@ -21,9 +22,9 @@ int	main(void)
 	for (int i = 0; i < size; i += 1)
 	{
 		if (i % 2 == 0)
-			objs[i] = new Dog();
+			objs[i] = new Dog("Dog");
 		else
-			objs[i] = new Cat();
+			objs[i] = new Cat("Cat");
 	}
 
 	for (int i = 0; i < size; i += 1)

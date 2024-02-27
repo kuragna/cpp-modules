@@ -1,6 +1,6 @@
 NAME		=	a.out
 CC			=	c++
-CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98 -g3 #-fsanitize=address
+CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -fr
 SRC			=	main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 INC			=	AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp IMateriaSource.hpp MateriaSource.hpp

@@ -6,16 +6,16 @@ Cat::Cat(void) : Animal()
 	brain = new Brain();
 }
 
-Cat::Cat(const std::string &type)
+Cat::Cat(const std::string &type) : Animal(type)
 {
 	std::cout << "Cat constructor called" << std::endl;
-	this->type = type;
-	// TODO: intial brain here
+	this->type  = type;
+	this->brain = new Brain(); 
 }
 
 Cat::Cat(const Cat &cat) : Animal(cat)
 {
-	std::cout << "Cat constructor called" << std::endl;
+	std::cout << "Cat copy constructor called" << std::endl;
 	type  = cat.type;
 	brain = new Brain(*cat.brain);
 }

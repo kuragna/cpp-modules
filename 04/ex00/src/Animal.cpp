@@ -5,9 +5,14 @@ Animal::Animal(void)
 	std::cout << "Animal defualt constructor called" << std::endl;
 }
 
+Animal::Animal(const std::string type)
+{
+	this->type = type;
+}
+
 Animal::Animal(const Animal &animal)
 {
-	std::cout << "Animal constructor called" << std::endl;
+	std::cout << "Animal copy constructor called" << std::endl;
 	type = animal.type;
 }
 

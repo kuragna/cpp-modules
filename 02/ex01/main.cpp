@@ -1,9 +1,5 @@
 
 #include "Fixed.hpp"
-#include <iomanip>
-
-// to convert fixed-point to integer shift it right N bits
-// to convert integer to fixed-point shift it left N bits
 
 int main(void)
 {

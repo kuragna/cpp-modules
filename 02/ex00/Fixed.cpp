@@ -6,17 +6,17 @@ Fixed::Fixed(void)
 	number = 0;
 }
 
-Fixed::Fixed(Fixed &fixed)
+Fixed::Fixed(const Fixed &fixed)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	number = fixed.number;
+	operator=(fixed);
 }
 
-Fixed	&Fixed::operator=(Fixed &fixed)
+Fixed	&Fixed::operator=(const Fixed &fixed)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	getRawBits();
-	return fixed;
+	number = fixed.getRawBits();
+	return *this;
 }
 
 Fixed::~Fixed(void)

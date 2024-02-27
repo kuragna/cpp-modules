@@ -3,53 +3,8 @@
 #include "../include/Character.hpp"
 #include "../include/MateriaSource.hpp"
 
-#if 1
-	#define LOG(ptr) std::cout << "[INFO]: address: `" << ptr << "` -> " << __FILE__ << ":" << __LINE__ << std::endl;
-#endif
-
-void	leaks(void)
-{
-	system("leaks -q a.out");
-}
-
-
 int main(void)
 {
-	atexit(leaks);
-
-	IMateriaSource *s = new MateriaSource();
-	s->learnMateria(new Ice());
-
-	ICharacter *m = new Character("foo");
-
-	AMateria *t;
-
-	t = s->createMateria("ice");
-	m->equip(t);
-
-	t = s->createMateria("ice");
-	m->equip(t);
-
-	t = s->createMateria("ice");
-	m->equip(t);
-
-	t = s->createMateria("ice");
-	m->equip(t);
-
-	ICharacter *b = new Character("bar");
-	m->unequip(4);
-
-// 	m->use(0, *b);
-// 	m->use(1, *b);
-// 	m->use(2, *b);
-// 	m->use(3, *b);
-
-	delete b;
-	delete s;
-	delete m;
-	return 0;
-
-#if 1
 	/* example from subject */
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
@@ -71,9 +26,7 @@ int main(void)
 	delete bob;
 	delete me;
 	delete src;
-#elif 0
 
-	// TODO: equip same materia multiple time
 	/* example unexisting */
 	IMateriaSource *src2 = new MateriaSource();
 	src2->learnMateria(new Ice());
@@ -97,9 +50,21 @@ int main(void)
 	delete me2;
 	delete src2;
 	delete tmp2;
-#else
 
-#endif
+	/* example of slots full */
+	ICharacter *foo = new Character("foo");
+
+	foo->equip(new Ice());
+	foo->equip(new Ice());
+	foo->equip(new Ice());
+	foo->equip(new Ice());
+
+	Ice *a = new Ice("Ice");
+
+	foo->equip(a);
+
+	delete foo;
+	delete a;
 
 	return 0;
 }

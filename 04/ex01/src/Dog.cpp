@@ -6,17 +6,17 @@ Dog::Dog(void) : Animal()
 	brain = new Brain();
 }
 
-Dog::Dog(const std::string &type)
+Dog::Dog(const std::string &type) : Animal(type)
 {
 	std::cout << "Dog constructor called" << std::endl;
-	this->type = type;
+	this->type  = type;
+	this->brain = new Brain(); 
 }
 
 Dog::Dog(const Dog &dog) : Animal(dog)
 {
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << "Dog copy constructor called" << std::endl;
 	type	= dog.type;
-	brain	= dog.brain;
 	brain	= new Brain(*dog.brain);
 }
 

@@ -8,16 +8,13 @@ Brain::Brain(void)
 Brain::Brain(const Brain &brain)
 {
 	std::cout << "Brain constructor called" << std::endl;
-	for (size_t i = 0; i < 100; i += 1)
-	{
-		ideas[i] = brain.ideas[i];
-	}
+	operator=(brain);
 }
 
 Brain	&Brain::operator=(const Brain &brain)
 {
 	std::cout << "Brain assignment operator called" << std::endl;
-	for (size_t i = 0; i < 100; i += 1)
+	for (size_t i = 0; i < ideasSize; i += 1)
 	{
 		ideas[i] = brain.ideas[i];
 	}
@@ -28,4 +25,3 @@ Brain::~Brain(void)
 {
 	std::cout << "Brain destructor called" << std::endl;
 }
-

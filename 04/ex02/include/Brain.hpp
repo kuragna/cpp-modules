@@ -5,7 +5,8 @@
 
 class Brain
 {
-	std::string	ideas[100];
+	static size_t const brainSize = 100;
+	std::string	ideas[brainSize];
 public:
 	Brain(void);
 	Brain(const Brain &brain);
