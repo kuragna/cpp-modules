@@ -1,16 +1,17 @@
 #include "Bureaucrat.hpp"
 
-
-Bureaucrat::Bureaucrat(int grade)
+Bureaucrat::Bureaucrat(int grade, const std::string &name)
 {
-    this->name  = "foo";
-
-    if (grade < 0 || grade > 150)
-    {
-        throw std::runtime_error("out of range");
-    }
-    // TODO: exception
-    this->grade = grade;
+	if (grade < 0)
+	{
+		GradeTooHighException();
+	}
+	if (grade > 150)
+	{
+		GradeTooLowException();
+	}
+	this->grade = grade;
+	this->name  = name;
 }
 
 std::string &Bureaucrat::getName(void)
@@ -25,29 +26,29 @@ int Bureaucrat::getGrade(void)
 
 void    Bureaucrat::increment(void)
 {
-    this->grade += 1;
-    if (this->grade > 150)
-    {
-        throw std::runtime_error("icrement");
-    }
+    this->grade -= 1;
+		if (this->grade < 0)
+		{
+			GradeTooHighException();
+		}
 }
 void    Bureaucrat::decrement(void)
 {
-    this->grade -= 1;
-    if (this->grade < 0)
-    {
-        throw std::runtime_error("decrement");
-    }
+    this->grade += 1;
+		if (this->grade > 150)
+		{
+			GradeTooLowException();
+		}
 }
 
 void    Bureaucrat::GradeTooLowException(void)
 {
-    assert(__FUNCTION__ && 0);
+		throw std::out_of_range("out of range: grade too low");
 }
 
 void    Bureaucrat::GradeTooHighException(void)
 {
-    assert(__FUNCTION__ && 0);
+		throw std::out_of_range("out of range: grade too high");
 }
 
 std::ostream &operator<<(std::ostream &os, Bureaucrat &obj)

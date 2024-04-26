@@ -9,7 +9,7 @@ class Bureaucrat
     std::string name; // ?
     int grade;
 public:
-    Bureaucrat(int grade); // ?
+    Bureaucrat(int grade, const std::string &name); // ?
     std::string &getName(void);
     int getGrade(void);
     void    increment(void);
