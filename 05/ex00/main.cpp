@@ -2,6 +2,10 @@
 
 int main(void)
 {
+	std::cout << Bureaucrat(0, "hey") << std::endl;
+	//std::cout << std::string("test") << std::endl;
+	return 0;
+#if 0
 	try {
 		// pass valid grade
 		Bureaucrat b(42, "foo");
@@ -26,5 +30,6 @@ int main(void)
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 		return 1;
 	}
+#endif
 	return 0;
 }

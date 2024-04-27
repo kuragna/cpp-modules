@@ -1,10 +1,10 @@
 NAME		= a.out
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++11 #-std=c++98
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp Bureaucrat.cpp
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) Bureaucrat.hpp
 	c++ -o $@ $(CPPFLAGS) $^
 
 fclean:

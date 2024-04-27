@@ -14,12 +14,12 @@ Bureaucrat::Bureaucrat(int grade, const std::string &name)
 	this->name  = name;
 }
 
-std::string &Bureaucrat::getName(void)
+const std::string &Bureaucrat::getName(void) const
 {
     return this->name;
 }
 
-int Bureaucrat::getGrade(void)
+int Bureaucrat::getGrade(void) const
 {
     return this->grade;
 }
@@ -51,7 +51,10 @@ void    Bureaucrat::GradeTooHighException(void)
 		throw std::out_of_range("out of range: grade too high");
 }
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj)
+Bureaucrat::~Bureaucrat() {}
+
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj)
 {
     os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
     return os;

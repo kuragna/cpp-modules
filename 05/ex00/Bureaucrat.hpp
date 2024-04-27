@@ -1,7 +1,8 @@
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
 
 #include <iostream>
 #include <string>
-#include <cassert>
 
 class Bureaucrat
 {
@@ -10,12 +11,15 @@ class Bureaucrat
     int grade;
 public:
     Bureaucrat(int grade, const std::string &name); // ?
-    std::string &getName(void);
-    int getGrade(void);
+		~Bureaucrat();
+    const 	std::string &getName(void) const;
+    int			getGrade(void) const;
     void    increment(void);
     void    decrement(void);
     void    GradeTooHighException(void);
     void    GradeTooLowException(void);
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj);
+
+#endif  // BUREAUCRAT_HPP
