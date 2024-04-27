@@ -1,0 +1,74 @@
+#include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat(int grade, const std::string &name)
+{
+	if (grade < 0)
+	{
+		GradeTooHighException();
+	}
+	if (grade > 150)
+	{
+		GradeTooLowException();
+	}
+	this->grade = grade;
+	this->name  = name;
+}
+
+std::string &Bureaucrat::getName(void)
+{
+    return this->name;
+}
+
+int Bureaucrat::getGrade(void)
+{
+    return this->grade;
+}
+
+void    Bureaucrat::increment(void)
+{
+    this->grade -= 1;
+		if (this->grade < 0)
+		{
+			GradeTooHighException();
+		}
+}
+void    Bureaucrat::decrement(void)
+{
+    this->grade += 1;
+		if (this->grade > 150)
+		{
+			GradeTooLowException();
+		}
+}
+
+void    Bureaucrat::GradeTooLowException(void)
+{
+		throw std::out_of_range("out of range: grade too low");
+}
+
+void    Bureaucrat::GradeTooHighException(void)
+{
+		throw std::out_of_range("out of range: grade too high");
+}
+
+void		Bureaucrat::signForm(Form &f)
+{
+	if (f.isSigned())
+	{
+		std::cout << this->name << " signed " << f.getName() << std::endl;
+	}
+	else
+	{
+		std::cout << this->name 
+							<< " couldn't sign " 
+							<< f.getName() 
+							<< " because <reason>" 
+							<< std::endl;
+	}
+}
+
+std::ostream &operator<<(std::ostream &os, Bureaucrat &obj)
+{
+    os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
+    return os;
+}
