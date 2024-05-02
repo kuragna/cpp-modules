@@ -5,7 +5,7 @@ SRC			= main.cpp Bureaucrat.cpp
 all: $(NAME)
 
 $(NAME): $(SRC) Bureaucrat.hpp
-	c++ -o $@ $(CPPFLAGS) $^
+	c++ -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
 
 fclean:
 	rm -fr $(NAME)
