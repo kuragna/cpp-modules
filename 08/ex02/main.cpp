@@ -7,7 +7,7 @@
 
 #define print(e) std::cout << (e) << std::endl;
 // TODO: no match a function
-// TODO: fix iterator at the top of stack
+// TODO: should we copy original stack to ours?
 
 template<class T>
 class MutantStack
@@ -15,9 +15,8 @@ class MutantStack
 	std::list<T> list;
 public:
 	MutantStack(void);
-	MutantStack(const MutantStack &ms);
 	~MutantStack(void);
-
+	MutantStack(const MutantStack &ms);
 	MutantStack &operator=(const MutantStack &ms);
 
 	void	push(const T &value);
@@ -101,21 +100,22 @@ size_t	MutantStack<T>::size(void) const
 template<class T>
 void	MutantStack<T>::push(const T &value)
 {
-	this->list.push_back(value);
+	this->list.push_front(value);
 }
 
 template<class T>
 void	MutantStack<T>::pop(void)
 {
-	// TODO: check if stack is empty
-	this->list.pop_back();
+	if (!this->list.empty())
+		return;
+	this->list.pop_front();
 }
 
 template<class T>
 const T	&MutantStack<T>::top(void) const
 {
 	// TODO: check if stack is empty
-	return this->list.back();
+	return this->list.front();
 }
 
 template<class T>
@@ -135,31 +135,21 @@ MutantStack<T>::~MutantStack(void) {}
 
 int main()
 {
-	std::cout << std::boolalpha; // dont fucking touch it. OK. yes sir.
 	MutantStack<int> mstack;
 	mstack.push(1337);
 	mstack.push(42);
-
+	mstack.push(42 / 2);
 
 	MutantStack<int>::iterator it  = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end(); 
 
-	print(&it);
-	print(&ite);
+	it++;
+	--it;
 
 	while (it != ite)
 	{
 		print(*it);
 		it++;
-	}
-
-	print("----------------------");
-
-
-	while (!mstack.empty())
-	{
-		print(mstack.top());
-		mstack.pop();
 	}
 
 
