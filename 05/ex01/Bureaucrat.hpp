@@ -3,28 +3,44 @@
 
 #include <iostream>
 #include <string>
-#include <cassert>
+
 #include "Form.hpp"
 
 class Form;
 
 class Bureaucrat
 {
-    // TODO: make name as constant
-    std::string name; // ?
+	// TODO: try to intialize const variable in assignment operator
+    const std::string name;
     int grade;
+
 public:
-    Bureaucrat(int grade, const std::string &name); // ?
-    std::string &getName(void);
-    int getGrade(void);
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			const char *what() const throw();
+	};
+
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			const char *what() const throw();
+	};
+
+	Bureaucrat(void);
+    Bureaucrat(int grade, const std::string &name);
+	Bureaucrat(const Bureaucrat &obj);
+	Bureaucrat &operator=(const Bureaucrat &obj);
+	~Bureaucrat();
+
+    const 	std::string &getName(void) const;
+    int		getGrade(void) const;
     void    increment(void);
     void    decrement(void);
-    void    GradeTooHighException(void);
-    void    GradeTooLowException(void);
 
-		void		signForm(Form &f);
+	void	signForm(const Form &form);
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj);
 
 #endif  // BUREAUCRAT_HPP

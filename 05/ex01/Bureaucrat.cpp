@@ -1,25 +1,33 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(int grade, const std::string &name)
+Bureaucrat::Bureaucrat(void) : grade(0) {}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &obj) : name(obj.name), grade(obj.grade) {}
+
+Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
+{
+	this->grade = obj.grade;
+	return *this;	
+}
+
+Bureaucrat::Bureaucrat(int _grade, const std::string &_name) : name(_name), grade(_grade)
 {
 	if (grade < 0)
 	{
-		GradeTooHighException();
+		throw GradeTooHighException();
 	}
 	if (grade > 150)
 	{
-		GradeTooLowException();
+		throw GradeTooLowException();
 	}
-	this->grade = grade;
-	this->name  = name;
 }
 
-std::string &Bureaucrat::getName(void)
+const std::string &Bureaucrat::getName(void) const
 {
     return this->name;
 }
 
-int Bureaucrat::getGrade(void)
+int Bureaucrat::getGrade(void) const
 {
     return this->grade;
 }
@@ -27,48 +35,50 @@ int Bureaucrat::getGrade(void)
 void    Bureaucrat::increment(void)
 {
     this->grade -= 1;
-		if (this->grade < 0)
-		{
-			GradeTooHighException();
-		}
+	if (this->grade < 0)
+	{
+		throw GradeTooHighException();
+	}
 }
 void    Bureaucrat::decrement(void)
 {
     this->grade += 1;
-		if (this->grade > 150)
-		{
-			GradeTooLowException();
-		}
-}
-
-void    Bureaucrat::GradeTooLowException(void)
-{
-		throw std::out_of_range("out of range: grade too low");
-}
-
-void    Bureaucrat::GradeTooHighException(void)
-{
-		throw std::out_of_range("out of range: grade too high");
-}
-
-void		Bureaucrat::signForm(Form &f)
-{
-	if (f.isSigned())
+	if (this->grade > 150)
 	{
-		std::cout << this->name << " signed " << f.getName() << std::endl;
+		throw GradeTooLowException();
+	}
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return "Grade too low";	
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return "Grade too high";
+}
+
+void	Bureaucrat::signForm(const Form &form)
+{
+	if (form.isSigned())
+	{
+		std::cout << "'" << this->name << "' signed " << form.getName() << std::endl; 
 	}
 	else
 	{
-		std::cout << this->name 
-							<< " couldn't sign " 
-							<< f.getName() 
-							<< " because <reason>" 
-							<< std::endl;
+		std::cout << "'" 
+				  <<  this->name 
+				  << "' couldn't sign " 
+				  << form.getName() 
+				  << " because grade too low or high" << std::endl;
 	}
 }
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj)
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj)
 {
-    os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
-    return os;
+	os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
+	return os;
 }
+
+Bureaucrat::~Bureaucrat() {}

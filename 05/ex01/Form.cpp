@@ -1,19 +1,29 @@
 #include "Form.hpp"
 
-Form::Form(const std::string &name, int gradeS, int gradeX)
+Form::Form(void) : gradeS(0), gradeX(0), _signed(false) {}
+
+Form::Form(const std::string &_name, int _gradeS, int _gradeX) : name(_name), gradeS(_gradeS), gradeX(_gradeX)
 {
 	if (gradeS < 0 || gradeX < 0)
 	{
-		GradeTooHighException();
+		throw GradeTooHighException();
 	}
 	if (gradeS > 150 || gradeX > 150)
 	{
-		GradeTooLowException();
+		throw GradeTooLowException();
 	}
+	this->_signed	= false;
+}
+
+Form::Form(const Form &obj) : name(obj.name), gradeS(obj.gradeS), gradeX(obj.gradeX)
+{
 	this->_signed = false;
-	this->name     = name;
-	this->gradeS   = gradeS; // grade required to sign it
-	this->gradeX	 = gradeX; // grade required to execute it
+}
+
+Form	&Form::operator=(const Form &obj)
+{
+	(void) obj;
+	return *this;
 }
 
 const std::string &Form::getName(void) const
@@ -36,34 +46,32 @@ bool	Form::isSigned(void) const
 	return this->_signed;
 }
 
-void	Form::GradeTooLowException(void)
-{
-	throw std::out_of_range("out of range: grade too low");
-}
-
-void	Form::GradeTooHighException(void)
-{
-	throw std::out_of_range("out of range: grade too high");
-}
-
 void	Form::beSigned(Bureaucrat &b)
 {
-	const int bGrade = b.getGrade();
-
-	if (bGrade > this->gradeS)
+	if (b.getGrade() > this->gradeS)
 	{
-		GradeTooLowException();	
+		throw GradeTooLowException();	
 	}
 	this->_signed = true;
 }
 
+const char *Form::GradeTooLowException::what() const throw()
+{
+	return "out of bounds: grade too low";	
+}
+
+const char *Form::GradeTooHighException::what() const throw()
+{
+	return "out of bounds: grade too high";
+}
+
 std::ostream	&operator<<(std::ostream &os, const Form &obj)
 {
-	std::string str = "No";
-	if (obj.isSigned())
-		str = "Yes";
-	os << obj.getName() << ", Grades: " << obj.getGradeS() << " "
-		 << obj.getGradeX() << ", " << "signed: " << str;
+	os << obj.getName() 
+	   << ", form grades: "
+	   << obj.getGradeS()
+	   << ", "
+	   << obj.getGradeX();
 	return os;
 }
 
