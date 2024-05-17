@@ -32,8 +32,13 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
 	{
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	}
+}
+
+RobotomyRequestForm	*RobotomyRequestForm::clone(const std::string &target) const
+{
+	return new RobotomyRequestForm(target);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}

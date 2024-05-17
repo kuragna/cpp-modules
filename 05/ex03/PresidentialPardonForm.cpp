@@ -22,8 +22,13 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
 	{
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	}
+}
+
+PresidentialPardonForm	*PresidentialPardonForm::clone(const std::string &target) const
+{
+	return new PresidentialPardonForm(target);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void) {}

@@ -48,7 +48,7 @@ bool	Form::isSigned(void) const
 
 void	Form::beSigned(Bureaucrat &b)
 {
-	if (b.getGrade() > this->gradeS)
+	if (b.getGrade() >= this->gradeS)
 	{
 		throw GradeTooLowException();	
 	}
@@ -57,12 +57,12 @@ void	Form::beSigned(Bureaucrat &b)
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return "out of bounds: grade too low";	
+	return "Form::GradeTooLowException";
 }
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return "out of bounds: grade too high";
+	return "Form::GradeTooHighException";
 }
 
 std::ostream	&operator<<(std::ostream &os, const Form &obj)

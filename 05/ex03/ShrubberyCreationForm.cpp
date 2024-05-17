@@ -28,12 +28,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(
 		{
 			file << tree[i] << std::endl;
 		}
-		file.close();
 	}
-	else
-	{
-		std::cerr << "Error: could not create a file: " << filename << std::endl;
-	}
+	file.close();
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &s) : AForm(s)
@@ -51,8 +47,13 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
 	{
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 	}
+}
+
+ShrubberyCreationForm	*ShrubberyCreationForm::clone(const std::string &target) const
+{
+	return new ShrubberyCreationForm(target);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}

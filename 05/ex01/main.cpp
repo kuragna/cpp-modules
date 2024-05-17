@@ -2,6 +2,11 @@
 
 int main(void)
 {
+	{
+		Bureaucrat b(1, "bz");
+		Form f("mok 9ahba", 2, 2);
+	}
+	return 0;
 #if 1
 	// valid grades
 	try {
