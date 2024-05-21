@@ -1,11 +1,6 @@
 #include "Intern.hpp"
 
-Intern::Intern(void)
-{
-	this->forms[0] = new ShrubberyCreationForm();
-	this->forms[1] = new RobotomyRequestForm();
-	this->forms[2] = new PresidentialPardonForm();
-}
+Intern::Intern(void) {}
 
 Intern::Intern(const Intern &intern)
 {
@@ -20,23 +15,23 @@ Intern	&Intern::operator=(const Intern &intern)
 
 AForm	*Intern::makeForm(const std::string &name, const std::string &target)
 {
+	const std::string names[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	for (int i = 0; i < 3; i += 1)
 	{
-		if (name == this->forms[i]->getName())
+		if (names[i] == name)
 		{
 			std::cout << "Intern creates '" << name << "'" << std::endl;
-			return forms[i]->clone(target);
+			switch (i)
+			{
+			case 0: return new ShrubberyCreationForm(target);
+			case 1: return new RobotomyRequestForm(target);
+			case 2: return new PresidentialPardonForm(target);
+			}
 		}
 	}
 	std::cerr << "Intern could not create '" << name << "'" << std::endl;
 	return 0;
 }
 
-Intern::~Intern(void)
-{
-	for (int i = 0; i < 3; i += 1)
-	{
-		delete this->forms[i];
-	}
-}
+Intern::~Intern(void) {}
 

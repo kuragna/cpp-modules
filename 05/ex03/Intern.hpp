@@ -7,7 +7,6 @@
 
 class Intern
 {
-	AForm *forms[3];
 public:
 	Intern(void);
 	Intern(const Intern &intern);

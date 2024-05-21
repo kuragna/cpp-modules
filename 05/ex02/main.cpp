@@ -7,14 +7,12 @@
 int main(void)
 {
 	// ShrubberyCreationForm
-	// Bureaucrat try to execute form
 	try {
 		// valid grade to execute form
 		Bureaucrat b(150, "foo");
 		ShrubberyCreationForm s("home");
 		s.beSigned(b); // sign form
 		s.execute(b);
-#if 0
 		// bureaucrat didn't sign form
 		{
 			Bureaucrat b(42, "baz");
@@ -28,12 +26,10 @@ int main(void)
 			s.beSigned(b);
 			s.execute(b);
 		}
-#endif
 	} catch (std::exception &e) {
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
 
-#if 0
 	// RobotomyRequestForm
 	try {
 		Bureaucrat b(42, "foo");
@@ -79,6 +75,5 @@ int main(void)
 	} catch (std::exception &e) {
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
-#endif
 	return 0;
 }

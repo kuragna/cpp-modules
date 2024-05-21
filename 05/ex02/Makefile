@@ -1,5 +1,5 @@
 NAME		= a.out
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp \
 			  Bureaucrat.cpp \
 			  AForm.cpp \

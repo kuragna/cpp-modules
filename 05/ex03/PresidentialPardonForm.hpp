@@ -13,7 +13,6 @@ public:
 	PresidentialPardonForm	&operator=(const PresidentialPardonForm &p);
 	~PresidentialPardonForm(void);
 
-	PresidentialPardonForm	*clone(const std::string &target) const;
 	void execute(Bureaucrat const &executor) const;
 };
 #endif // PRESIDENTIALPARDONFORM_HPP

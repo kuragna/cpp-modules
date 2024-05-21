@@ -14,7 +14,6 @@ public:
 	RobotomyRequestForm	&operator=(const RobotomyRequestForm &r);
 	~RobotomyRequestForm(void);
 
-	RobotomyRequestForm	*clone(const std::string &target) const;
 	void execute(Bureaucrat const &executor) const;
 };
 #endif // ROBOTOMY_REQUEST_FORM_HPP

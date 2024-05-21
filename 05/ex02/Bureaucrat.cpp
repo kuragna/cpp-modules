@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void) : grade(0) {}
+Bureaucrat::Bureaucrat(void) : grade(1) {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj) : name(obj.name), grade(obj.grade) {}
 
@@ -12,13 +12,13 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
 
 Bureaucrat::Bureaucrat(int _grade, const std::string &_name) : name(_name), grade(_grade)
 {
-	if (grade < 0)
+	if (grade < 1)
 	{
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
 	if (grade > 150)
 	{
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
@@ -35,9 +35,9 @@ int Bureaucrat::getGrade(void) const
 void    Bureaucrat::increment(void)
 {
     this->grade -= 1;
-	if (this->grade < 0)
+	if (this->grade < 1)
 	{
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
 }
 void    Bureaucrat::decrement(void)
@@ -45,7 +45,7 @@ void    Bureaucrat::decrement(void)
     this->grade += 1;
 	if (this->grade > 150)
 	{
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
@@ -59,27 +59,50 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
 	return "Bureaucrat::GradeTooHighException";
 }
 
-void	Bureaucrat::signForm(const AForm &form)
+void	Bureaucrat::signForm(AForm &form)
 {
 	if (form.isSigned())
 	{
-		std::cout << "'" << this->name << "' signed " << form.getName() << std::endl; 
+		std::cout << "'"
+				  << this->name
+				  << "' couldn't sign '"
+				  << form.getName()
+				  << "' because it's signed" << std::endl;
+		return ;
+	}
+	if (this->grade <= form.getGradeS())
+	{
+		form.beSigned(*this);
+		std::cout << "'" << this->name << "' signed '" << form.getName() << "'" << std::endl;
 	}
 	else
 	{
-		std::cout << "'" 
-				  <<  this->name 
-				  << "' couldn't sign " 
-				  << form.getName() 
-				  << " because grade too low or high" << std::endl;
+		std::cout << "'"
+				  <<  this->name
+				  << "' couldn't sign "
+				  << form.getName()
+				  << " because grade too low" << std::endl;
 	}
 }
 
+// TODO: change it
 void	Bureaucrat::executeForm(AForm const &form)
 {
-	if (form.isSigned() && this->grade < form.getGradeX())
+	if (form.isSigned())
 	{
-		std::cout << "'" << this->name << "' executed " << form.getName() << std::endl;
+		if (this->grade < form.getGradeX())
+		{
+			std::cout << "'" << this->name << "' executed " << form.getName() << std::endl;
+		}
+		else
+		{
+			std::cout << "'" 
+				  << this->name 
+				  << "' couldn't execute " 
+				  << form.getName()
+				  << " because of grade execute is high"
+				  << std::endl;
+		}
 	}
 	else
 	{
@@ -87,7 +110,7 @@ void	Bureaucrat::executeForm(AForm const &form)
 				  << this->name 
 				  << "' couldn't execute " 
 				  << form.getName()
-				  << " because of grade execute is high"
+				  << " because it's not signed"
 				  << std::endl;
 	}
 }

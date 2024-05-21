@@ -7,7 +7,6 @@
 
 class Bureaucrat
 {
-	// TODO: try to intialize const variable in assignment operator
     const std::string name;
     int grade;
 

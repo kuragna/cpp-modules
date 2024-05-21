@@ -14,7 +14,6 @@ public:
 	ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &s);
 	~ShrubberyCreationForm(void);
 
-	ShrubberyCreationForm *clone(const std::string &target) const;
 	void execute(Bureaucrat const &executor) const;
 };
 #endif // SHRUBBERY_CREATION_FORM_HPP

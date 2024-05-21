@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void) : grade(0) {}
+Bureaucrat::Bureaucrat(void) : grade(1) {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj) : name(obj.name), grade(obj.grade) {}
 
@@ -12,13 +12,13 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &obj)
 
 Bureaucrat::Bureaucrat(int _grade, const std::string &_name) : name(_name), grade(_grade)
 {
-	if (grade < 0)
+	if (this->grade < 1)
 	{
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
-	if (grade > 150)
+	if (this->grade > 150)
 	{
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
@@ -35,9 +35,9 @@ int Bureaucrat::getGrade(void) const
 void    Bureaucrat::increment(void)
 {
     this->grade -= 1;
-	if (this->grade < 0)
+	if (this->grade < 1)
 	{
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 	}
 }
 void    Bureaucrat::decrement(void)
@@ -45,7 +45,7 @@ void    Bureaucrat::decrement(void)
     this->grade += 1;
 	if (this->grade > 150)
 	{
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 

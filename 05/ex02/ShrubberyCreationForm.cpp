@@ -49,10 +49,15 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
+	if (this->isSigned())
 	{
-		throw GradeTooLowException();
+		if (executor.getGrade() < this->getGradeX())
+		{
+			std::cout << "'" << executor.getName() << "' executed " << this->getName() << std::endl;
+		}
+		else throw GradeTooLowException();
 	}
+	// TODO: otherwise
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}

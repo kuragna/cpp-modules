@@ -24,6 +24,7 @@ public:
 		const char *what(void) const throw();
 	};
 
+
 	AForm(void);
 	AForm(const std::string &, int, int);
 	AForm(const AForm &obj);

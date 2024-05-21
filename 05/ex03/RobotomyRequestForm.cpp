@@ -15,6 +15,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("rob
 	{
 		std::cerr << target << " failed to robotomize" << std::endl;
 	}
+	this->count += 1;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &r) : AForm(r)
@@ -30,15 +31,15 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
-	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
+	if (this->isSigned())
 	{
-		throw GradeTooHighException();
+		if (executor.getGrade() < this->getGradeX())
+		{
+			std::cout << "'" << executor.getName() << "' executed " << this->getName() << std::endl;
+		}
+		else throw GradeTooLowException();
 	}
-}
-
-RobotomyRequestForm	*RobotomyRequestForm::clone(const std::string &target) const
-{
-	return new RobotomyRequestForm(target);
+	// TODO: otherwise
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}

@@ -38,7 +38,7 @@ public:
     void    increment(void);
     void    decrement(void);
 
-	void	signForm(const AForm &form);
+	void	signForm(AForm &form);
 	void	executeForm(AForm const &form);
 };
 

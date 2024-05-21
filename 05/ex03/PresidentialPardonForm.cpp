@@ -20,15 +20,15 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-	if (!(this->isSigned() && executor.getGrade() < this->getGradeX()))
+	if (this->isSigned())
 	{
-		throw GradeTooHighException();
+		if (executor.getGrade() < this->getGradeX())
+		{
+			std::cout << "'" << executor.getName() << "' executed " << this->getName() << std::endl;
+		}
+		else throw GradeTooLowException();
 	}
-}
-
-PresidentialPardonForm	*PresidentialPardonForm::clone(const std::string &target) const
-{
-	return new PresidentialPardonForm(target);
+	// TODO: otherwise
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void) {}
