@@ -109,7 +109,7 @@ void	Bureaucrat::executeForm(AForm const &form)
 				  << this->name 
 				  << "' couldn't execute " 
 				  << form.getName()
-				  << " because it's not signed"
+				  << " because is not signed"
 				  << std::endl;
 	}
 }

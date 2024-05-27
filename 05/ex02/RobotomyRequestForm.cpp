@@ -39,7 +39,11 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		}
 		else throw GradeTooLowException();
 	}
-	// TODO: otherwise
+	else
+	{
+		std::cout << "'" << executor.getName() << "' couldn't execute " << this->getName() 
+				  << " because is not signed" << std::endl;
+	}
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void) {}

@@ -29,7 +29,6 @@ public:
 	AForm(const std::string &, int, int);
 	AForm(const AForm &obj);
 	AForm &operator=(const AForm &obj);
-	virtual ~AForm();
 
 	const std::string &getName(void) const;
 	int		getGradeS(void) const;
@@ -37,6 +36,7 @@ public:
 	bool	isSigned(void) const;
 	void	beSigned(Bureaucrat &b);
 
+	virtual ~AForm();
 	virtual void execute(Bureaucrat const &executor) const = 0;
 };
 

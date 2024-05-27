@@ -47,7 +47,7 @@ int main(void)
 
 	// invalid increment
 	try {
-		Bureaucrat b(0, "baz");
+		Bureaucrat b(1, "baz");
 		std::cout << b << std::endl;
 		b.increment();
 	} catch (std::exception &e) {

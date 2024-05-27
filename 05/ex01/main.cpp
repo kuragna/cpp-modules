@@ -25,12 +25,26 @@ int main(void)
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
 	std::cout << "-------------------------" << std::endl;
+
+	// bureaucrat can't sign form
+	try {
+		Form f("ff", 1, 1);
+		Bureaucrat b(42, "bab");
+		b.signForm(f);
+	} catch (std::exception &e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+
+	std::cout << "-------------------------" << std::endl;
 	
-	// form doesn't sign
+	// form it's signed
 	try {
 		Bureaucrat b(1, "foo");
+		Bureaucrat b2(1, "baz");
 		Form f("form", 42, 1);
+		
 		b.signForm(f);
+		b2.signForm(f);
 	} catch (std::exception &e) {
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
