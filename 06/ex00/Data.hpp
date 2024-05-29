@@ -4,20 +4,22 @@
 #include <string>
 #include <limits>
 #include <iostream>
-#include <cstdlib>
 #include <iomanip>
+
+#include <cmath>
+#include <cstdlib>
 #include <cstring>
 
 class Data
 {
 	std::string str;
 	int	countDecimalNumber;
-public:
+	int	count;
+	static const char *types[5];
 	enum Type { CHAR, INT, FLOAT, DOUBLE, NONE };
 	Type type;
+public:
 	Data(const std::string &str);
-
-	void Decimal(double d, const std::string &s, bool isF);
 
 	bool isInteger(void);
 	Type isFloat(void);
@@ -30,6 +32,8 @@ public:
 	void	Double(double d);
 	void	Int(long n);
 	void	Float(float f);
+
+	static void	noOne(void);
 };
 
 #endif  // DATA_HPP

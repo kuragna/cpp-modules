@@ -1,9 +1,9 @@
 #include "Data.hpp"
 #include <cmath>
 
-const char *typess[] = {"char", "int", "float", "double", "none"};
+const char *Data::types[] = {"char", "int", "float", "double", "none"};
 
-Data::Data(const std::string &str) : str(str), countDecimalNumber(1) {}
+Data::Data(const std::string &str) : str(str), countDecimalNumber(1), count(0) {}
 
 char Data::getChar(void)
 {
@@ -28,6 +28,7 @@ bool Data::isInteger(void)
 		it += 1;
 	for (; it != str.end(); it += 1)
 	{
+		this->count += 1;
 		if (!std::isdigit(*it)) return false;
 	}
 	return true;
@@ -56,15 +57,16 @@ Data::Type Data::getType(void)
 {
 	double d;
 
-	if (std::isprint(str[0]) && str.length() == 1)
-		return CHAR;
 	d = std::atof(str.c_str());
 	if (std::isnan(d) || std::isinf(d))
 		type = DOUBLE;
 	else if (isInteger())
 		type = INT;
+	else if (std::isprint(str[0]) && str.length() == 1)
+		type = CHAR;
 	else
 		type = isFloat();
+	std::cout << "type -> " << types[type] << std::endl;
 	return type;
 }
 
@@ -75,7 +77,6 @@ void Data::Char(long chr)
 	const int min = std::numeric_limits<unsigned char>::min();
 	
 	std::string str = "impossible";
-
 	if (chr >= min && chr <= max)
 	{
 		str = "Non displayable";
@@ -86,7 +87,7 @@ void Data::Char(long chr)
 			str += "'";
 		}
 	}
-	std::cout << "char: " << str << std::endl;
+	std::cout << types[this->type] << ": " << str << std::endl;
 }
 
 void	Data::Double(double d)
@@ -94,10 +95,10 @@ void	Data::Double(double d)
 	double max = std::numeric_limits<double>::max();
 	double min = std::numeric_limits<double>::min();
 	
-	std::cout << "double: ";
+	std::cout << types[DOUBLE] << ": ";
 	if (std::isnan(d) || d <= max || d >= min)
 	{
-		if (this->str.size() < 7)
+		if (this->count <= 7)
 		{
 			std::cout << std::setprecision(countDecimalNumber) << std::fixed;
 		}
@@ -112,7 +113,7 @@ void	Data::Int(long n)
 	const int max = std::numeric_limits<int>::max();
 	const int min = std::numeric_limits<int>::min();
 
-	std::cout << "int: ";
+	std::cout << types[INT] << ": ";
 	if (n <= (long)max && n >= (long)min)
 	{
 		std::cout << n << std::endl;
@@ -121,43 +122,15 @@ void	Data::Int(long n)
 	std::cout << "impossible" << std::endl;
 }
 
-void	Data::Decimal(double d, const std::string &s, bool isF)
-{
-	double max = std::numeric_limits<double>::max();
-	double min = std::numeric_limits<double>::min();
-
-	if (isF)
-	{
-		max = std::numeric_limits<float>::max();
-		min = std::numeric_limits<float>::min();
-	}
-	std::cout << s << ": ";
-	if (std::isinf(d) ||std::isnan(d) || d >= min || d <= max)
-	{
-		if (this->str.size() < 7)
-		{
-			std::cout << std::setprecision(countDecimalNumber) << std::fixed;
-		}
-		std::cout << d;
-		if (isF)
-			std::cout << "f";
-		std::cout << std::endl;
-	}
-	else
-	{
-		std::cout << "impossible" << std::endl;
-	}
-}
-
 void	Data::Float(float f)
 {
 	const double max = std::numeric_limits<float>::max();
 	const double min = std::numeric_limits<float>::min();
 	
-	std::cout << "float: ";
+	std::cout << types[FLOAT] << ": ";
 	if (std::isinf(f) ||std::isnan(f) ||f >= min || f <= max)
 	{
-		if (this->str.size() < 7)
+		if (this->count <= 7)
 		{
 			std::cout << std::setprecision(countDecimalNumber) << std::fixed;
 		}
@@ -165,4 +138,12 @@ void	Data::Float(float f)
 		return;
 	}
 	std::cout << "impossible"<< std::endl;
+}
+
+void	Data::noOne(void)
+{
+	for (int i = 0; i < 4; i += 1)
+	{
+		std::cout << types[i] << ": impossible" << std::endl;
+	}
 }
