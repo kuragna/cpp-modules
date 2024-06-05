@@ -1,98 +1,6 @@
-#include <iostream>
+#include "MutantStack.hpp"
 #include <vector>
-#include <stack>
 #include <algorithm>
-
-template<class T>
-class MutantStack : public std::stack<T>
-{
-	std::deque<T> dq;
-public:
-
-	MutantStack(void);
-	MutantStack(const MutantStack &ms);
-	MutantStack &operator=(const MutantStack &ms);
-	~MutantStack(void);
-
-	void	push(const T &value);
-	void	pop(void);
-	bool	empty(void) const;
-	size_t	size(void) const;
-
-	// iterators
-	typedef typename std::deque<T>::iterator 			iterator;
-	typedef typename std::deque<T>::reverse_iterator	reverse_iterator;
-
-	iterator			begin(void);
-	iterator 			end(void);
-	reverse_iterator	rbegin(void);
-	reverse_iterator	rend(void);
-};
-
-template<class T>
-MutantStack<T>::MutantStack(void) : std::stack<T>() {}
-
-template<class T>
-MutantStack<T>::MutantStack(const MutantStack<T> &ms) : std::stack<T>(ms) {}
-
-template<class T>
-MutantStack<T>	&MutantStack<T>::operator=(const MutantStack<T> &ms)
-{
-	std::stack<T>::operator=(ms);
-}
-
-template<class T>
-void	MutantStack<T>::push(const T &value)
-{
-	std::stack<T>::push(value);
-	dq.push_front(value);
-}
-
-template<class T>
-void	MutantStack<T>::pop(void)
-{
-	std::stack<T>::pop();
-	dq.pop_front();
-}
-
-template<class T>
-bool	MutantStack<T>::empty(void) const
-{
-	return dq.empty();
-}
-
-template<class T>
-size_t	MutantStack<T>::size(void) const
-{
-	return dq.size();
-}
-
-template<class T>
-typename MutantStack<T>::iterator MutantStack<T>::begin(void)
-{
-	return dq.begin();
-}
-
-template<class T>
-typename MutantStack<T>::iterator MutantStack<T>::end(void)
-{
-	return dq.end();
-}
-
-template<class T>
-typename MutantStack<T>::reverse_iterator MutantStack<T>::rbegin(void)
-{
-	return dq.rbegin();
-}
-
-template<class T>
-typename MutantStack<T>::reverse_iterator MutantStack<T>::rend(void)
-{
-	return dq.rend();
-}
-
-template<class T>
-MutantStack<T>::~MutantStack<T>(void) {}
 
 template<typename T>
 void	print(const T &e)
@@ -102,6 +10,7 @@ void	print(const T &e)
 
 int main(void)
 {
+	// subject's example
 	std::cout << std::boolalpha;
 
 	MutantStack<int> mstack;
@@ -172,11 +81,12 @@ int main(void)
 			it++;
 		}
 
-		std::cout << "--------------------" << std::endl;
 
 		std::stack<float> stack(mstack);
 
 	}
+
+	std::cout << "--------------------" << std::endl;
 
 	{
 		
@@ -200,7 +110,9 @@ int main(void)
 		}
 		
 	}
+
 	std::cout << "-----------------" << std::endl;
+
 	{
 		MutantStack<int> s;
 		MutantStack<int> s2;

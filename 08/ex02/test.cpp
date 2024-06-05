@@ -1,34 +1,23 @@
 
-#include <iostream>
-#include <list>
+#include <deque>
 #include <stack>
-#include <string>
-#include <vector>
+#include <iostream>
 
-template<class T>
-class Base
+class Test : public std::stack<int>
 {
-	std::deque<T> list;
 public:
-	Base() { std::cout << "constructor" << std::endl;}
-	void	push(const T &value)
+	void print()
 	{
-		this->list.push_back(value);
-	}
-	Base(const Base &base)
-	{
-		this->list = base.list;
+		std::cout << this->c.front() << std::endl;
 	}
 };
 
-
-
-int main()
+int main(void)
 {
-	Base<int> stack;
-	stack.push(42);
-	stack.push(1337);
+	Test t;
 
-	std::stack<int> mstack(stack);
+	t.push(1);
+	t.print();
+
 	return 0;
 }
