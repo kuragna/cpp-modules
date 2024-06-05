@@ -2,11 +2,11 @@
 #include <cassert>
 #include <iostream>
 #include <algorithm>
+#include <limits>
 
-Span::Span(unsigned int N)
-{
-	this->size = N;
-}
+Span::Span(void) : size(0), isSorted(false) {}
+
+Span::Span(unsigned int N) : size(N), isSorted(false) {}
 
 Span::Span(const Span &s)
 {
@@ -15,18 +15,18 @@ Span::Span(const Span &s)
 
 Span	&Span::operator=(const Span &s)
 {
-	this->size = s.size;
-	this->data = s.data;
+	this->size  = s.size;
+	this->items = s.items;
 	return *this;
 }
 
 void	Span::addNumber(int n)
 {
-	if (this->data.size() >= this->size)
+	if (items.size() >= size)
 	{
-		assert("throw an exception" && 0);
+		throw std::length_error("std::length_error");
 	}
-	this->data.push_back(n);
+	items.push_back(n);
 }
 
 void	Span::addNumber(iterator begin, iterator end)
@@ -39,20 +39,39 @@ void	Span::addNumber(iterator begin, iterator end)
 
 int Span::shortestSpan(void)
 {
-	if (this->data.size() < 2)
+	int re = std::numeric_limits<int>::max();
+
+	if (items.size() < 2)
 	{
-		assert("throw an exception" && 0);
+		throw std::length_error("std::length_error");
 	}
-	assert("not implemented" && 0);
+
+	if (!isSorted)
+	{
+		std::sort(items.begin(), items.end());
+		isSorted = true;
+	}
+
+	for (size_t i = 1; i < items.size(); i += 1)
+	{
+		int	dis = std::abs(items[i] - items[i - 1]);
+		if (dis < re) re = dis;
+	}
+	return re;
 }
 
 int Span::longestSpan(void)
 {
-	if (this->data.size() < 2)
+	if (items.size() < 2)
 	{
-		assert("throw an exception" && 0);
+		throw std::length_error("std::length_error");
 	}
-	assert("not implemented" && 0);
+	if (!isSorted)
+	{
+		std::sort(items.begin(), items.end());
+		isSorted = true;
+	}
+	return std::abs(items[0] - items[items.size() - 1]);
 }
 
 Span::~Span(void) {}

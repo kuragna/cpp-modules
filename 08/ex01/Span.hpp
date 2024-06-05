@@ -5,17 +5,20 @@
 
 class Span
 {
-	// TODO: make sure that const_iterator is not part of c++11
-	typedef std::vector<int>::const_iterator iterator;
+	typedef std::vector<int>::iterator iterator;
 	unsigned int size;
-	std::vector<int> data;
+	std::vector<int> items;
+	bool	isSorted;
 public:
+	Span(void);
 	Span(unsigned N);
 	Span(const Span &s);
 	Span	&operator=(const Span &s);
 	~Span(void);
+
 	void addNumber(int n);
 	void addNumber(iterator begin, iterator end);
+
 	int shortestSpan(void);
 	int longestSpan(void);
 };
