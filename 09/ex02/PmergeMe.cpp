@@ -123,11 +123,12 @@ void	PmergeMe::sortVector(void)
 		it++;
 	}
 	binarySearchInsert<std::vector<int> >(mainChain, pend);
+	this->vec = mainChain;
 }
 
-double	PmergeMe::time(void)
+double	PmergeMe::time(std::clock_t start, std::clock_t end)
 {
-	return 1000.0 * (this->end - this->start) / CLOCKS_PER_SEC;
+	return 100.0 * (end - start) / CLOCKS_PER_SEC;
 }
 
 void	PmergeMe::sortList(void)
@@ -166,46 +167,28 @@ void	PmergeMe::info(void)
 {
 	const size_t size = vec.size();
 	const fpSort sorts[2] = {&PmergeMe::sortVector, &PmergeMe::sortList};
-	double vectorTime = 0;
-	double listTime   = 0;
-
-
+	std::clock_t start;
+	std::clock_t end;
 
 	std::cout << "Before:  ";
 	std::for_each(vec.begin(), vec.end(), printV);
 	std::cout << std::endl;
 
-	if (size != 1)
+	for (size_t i = 0; i < 2 && size != 1; i += 1)
 	{
-		for (size_t i = 0; i < 2; i += 1)
-		{
-			this->start  = std::clock();
-			(this->*sorts[i])();
-			this->end    = std::clock();
-			timestamp[i] = PmergeMe::time();
-		}
-
-// 		this->start = std::clock();
-// 		sortVector();
-// 		this->end   = std::clock();
-// 		vectorTime  = PmergeMe::time();
-
-// 		this->start = std::clock();
-// 		sortList();
-// 		this->end   = std::clock();
-// 		listTime    = PmergeMe::time();
+		start  		  = std::clock();
+		(this->*sorts[i])();
+		end    		  = std::clock();
+		timestamps[i] = time(start, end);
 	}
 
 	std::cout << "After:   ";
 	std::for_each(vec.begin(), vec.end(), printV);
 	std::cout << std::endl;
 
-	
-	print("vector", vectorTime, size);
-	print("list",   listTime, size);
+	print("vector",   timestamps[0], size);
+	print("list  ",   timestamps[1], size);
 }
-
-
 
 PmergeMe::~PmergeMe(void) {}
 

@@ -12,21 +12,13 @@
 
 class PmergeMe
 {
-	//std::vector<int> S;
+	typedef void (PmergeMe::*fpSort)(void);
+
 	std::vector<int> vec;
 	std::list<int>   lst;
 	int	last;
+	double timestamps[2];
 
-	double timestamp[2];
-
-// 	// time
-// 	std::clock_t	start;
-// 	std::clock_t	end;
-
-	bool isPositive(std::string const &arg);
-	bool isEven(int size);
-
-	typedef void (PmergeMe::*fpSort)(void);
 
 public:
 
@@ -36,12 +28,13 @@ public:
 	PmergeMe	&operator=(const PmergeMe &pmergeme);
 	~PmergeMe(void);
 
+	bool isPositive(std::string const &arg);
+	bool isEven(int size);
 
-	double  time(std::clock_t start, std::clock_t end);
 	void	sortVector(void);
 	void	sortList(void);
 
-	std::vector<int> mergeInsertionSort(void);
+	double  time(std::clock_t start, std::clock_t end);
 
 	void	print(const char *str, double time, size_t size);
 	void	info(void);
