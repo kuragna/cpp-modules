@@ -2,12 +2,12 @@
 
 PmergeMe::PmergeMe(void) {}
 
-PmergeMe::PmergeMe(char **argv) : last(-1)
+PmergeMe::PmergeMe(char **argv) : oddFlag(false), last(0)
 {
 	for (int i = 0; argv[i]; i += 1)
 	{
 		if (!isPositive(argv[i]))
-			throw std::invalid_argument("invalid argument");
+			throw std::invalid_argument("invalid_argument");
 		int	value = std::atoi(argv[i]);
 		vec.push_back(value);
 		lst.push_back(value);
@@ -22,9 +22,14 @@ PmergeMe::PmergeMe(const PmergeMe &pm)
 
 PmergeMe	&PmergeMe::operator=(const PmergeMe &pm)
 {
-	this->last = pm.last;
-	this->vec  = pm.vec;
-	this->lst  = pm.lst;
+	if (this != &pm)
+	{
+		this->timestamps[0] = pm.timestamps[0];
+		this->timestamps[1] = pm.timestamps[1];
+		this->last 		    = pm.last;
+		this->vec           = pm.vec;
+		this->lst           = pm.lst;
+	}
 	return *this;
 }
 
@@ -60,7 +65,8 @@ R	PmergeMe::makePairs(T &c)
 
 	if (!isEven(c.size()))
 	{
-		this->last = c.back();
+		this->last    = c.back();
+		this->oddFlag = true;
 		c.pop_back();
 	}
 
@@ -92,23 +98,23 @@ void	PmergeMe::binarySearchInsert(T &mainChain, T &pend)
 		mainChain.insert(pos, *it);
 		it++;
 	}
-	if (this->last != -1)
+	if (this->oddFlag)
 	{
 		pos = std::lower_bound(mainChain.begin(), mainChain.end(), this->last);
 		mainChain.insert(pos, this->last);
-		this->last = -1;
+		this->oddFlag = false;
 	}
 }
 
 
 void	PmergeMe::sortVector(void)
 {
-	std::vector<int> pend;
-	std::vector<int> mainChain;
-	std::vector<std::pair<int, int> > pairs;
-	std::vector<std::pair<int, int> >::iterator it;
+	std::vector<unsigned int> pend;
+	std::vector<unsigned int> mainChain;
+	std::vector<std::pair<unsigned int, unsigned int> > pairs;
+	std::vector<std::pair<unsigned int, unsigned int> >::iterator it;
 
-	pairs = makePairs<std::vector<std::pair<int, int> >, std::vector<int> >(vec);
+	pairs = makePairs<std::vector<std::pair<unsigned int, unsigned int> >, std::vector<unsigned int> >(vec);
 	std::sort(pairs.begin(), pairs.end());
 	it = pairs.begin();
 
@@ -122,23 +128,23 @@ void	PmergeMe::sortVector(void)
 		pend.push_back((*it).second);
 		it++;
 	}
-	binarySearchInsert<std::vector<int> >(mainChain, pend);
+	binarySearchInsert<std::vector<unsigned int> >(mainChain, pend);
 	this->vec = mainChain;
 }
 
-double	PmergeMe::time(std::clock_t start, std::clock_t end)
+double	PmergeMe::time(clock_t start, clock_t end)
 {
-	return 100.0 * (end - start) / CLOCKS_PER_SEC;
+	return 1000.0 * static_cast<double>(end - start) / CLOCKS_PER_SEC;
 }
 
 void	PmergeMe::sortList(void)
 {
-	std::list<int> pend;
-	std::list<int> mainChain;
-	std::list<std::pair<int, int> > pairs;
-	std::list<std::pair<int, int> >::iterator it;
+	std::list<unsigned int> pend;
+	std::list<unsigned int> mainChain;
+	std::list<std::pair<unsigned int, unsigned int> > pairs;
+	std::list<std::pair<unsigned int, unsigned int> >::iterator it;
 
-	pairs = makePairs<std::list<std::pair<int, int> >, std::list<int> >(lst);
+	pairs = makePairs<std::list<std::pair<unsigned int, unsigned int> >, std::list<unsigned int> >(lst);
 	pairs.sort();
 	it = pairs.begin();
 
@@ -152,7 +158,7 @@ void	PmergeMe::sortList(void)
 		pend.push_back((*it).second);
 		it++;
 	}
-	binarySearchInsert<std::list<int> >(mainChain, pend);
+	binarySearchInsert<std::list<unsigned int> >(mainChain, pend);
 }
 
 void	PmergeMe::print(const char *str, double time, size_t size)
@@ -167,8 +173,8 @@ void	PmergeMe::info(void)
 {
 	const size_t size = vec.size();
 	const fpSort sorts[2] = {&PmergeMe::sortVector, &PmergeMe::sortList};
-	std::clock_t start;
-	std::clock_t end;
+	clock_t start;
+	clock_t end;
 
 	std::cout << "Before:  ";
 	std::for_each(vec.begin(), vec.end(), printV);
@@ -176,9 +182,9 @@ void	PmergeMe::info(void)
 
 	for (size_t i = 0; i < 2 && size != 1; i += 1)
 	{
-		start  		  = std::clock();
+		start  		  = clock();
 		(this->*sorts[i])();
-		end    		  = std::clock();
+		end    		  = clock();
 		timestamps[i] = time(start, end);
 	}
 

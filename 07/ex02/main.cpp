@@ -1,19 +1,12 @@
-#include <iostream>
 #include "Array.hpp"
+#include <iostream>
 #include <cstdlib>
-
-int main()
-{
-	Array<int> a(10);
-	Array<int> b;
-
-	b = a;
-
-	return 0;
-}
+#include <vector>
 
 #define MAX_VAL 750
-int main2(int, char**)
+
+
+int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
@@ -44,7 +37,7 @@ int main2(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "Exception caught: " << e.what() << '\n';
     }
     try
     {
@@ -52,13 +45,13 @@ int main2(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "Exception caught: " << e.what() << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }

@@ -8,7 +8,6 @@ void ScalarConverter::convert(std::string const &str)
 	long double decimal;
 
 	int	type = data.getType();
-	std::cout << "t -> " << data.getType()<< std::endl;
 	switch (type)
 	{
 	case 0: integer = data.getChar();

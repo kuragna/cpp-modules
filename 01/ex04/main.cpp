@@ -12,14 +12,14 @@ bool	replace(std::string filename, std::string s1, std::string s2)
 		std::cerr << "Error: string1 may not be empty" << std::endl;
 		return false;
 	}
-	instream.open(filename);
+	instream.open(filename.c_str());
 	if (!instream.is_open())
 	{
 		std::cerr << "Error: could not open: " << filename << std::endl;
 		return false;
 	}
 	filename += ".replace";
-	outstream.open(filename);
+	outstream.open(filename.c_str());
 	if (!outstream.is_open())
 	{
 		std::cerr << "Error: could not open: " << filename << std::endl;

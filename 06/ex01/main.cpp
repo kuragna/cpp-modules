@@ -1,22 +1,5 @@
-#include <cstring>
 #include <iostream>
 #include <stdint.h>
-
-#define print(a) std::cout << (a) << std::endl
-
-// equivalent
-// 		*(int*) <- == -> *reinterpret_cast<int*>(anyPointer)
-// 		 (int)  <- == ->  static_cast<int>(any regular variable)
-
-
-// static_cast -> cast from void* to anytype <->
-// 			   -> cast from base to derived  <->
-// 			   -> cast primitive types		 <->
-// 			   -> not allow between diferente pointers type
-// dynamic_cast -> works with classes
-// 				-> downcast (from derived to base class)
-
-// my name -> 431198398561
 
 struct Data
 {

@@ -5,7 +5,7 @@ SRC			= main.cpp
 all: $(NAME)
 
 $(NAME): $(SRC) whatever.hpp
-	c++ -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
+	c++ -o $@ $(CPPFLAGS) $(SRC)
 
 fclean:
 	rm -fr $(NAME)

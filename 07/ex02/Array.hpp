@@ -2,7 +2,6 @@
 #define ARRAY_HPP
 
 #include <iostream>
-#include <cstring>
 
 template<class T>
 class Array
@@ -12,8 +11,8 @@ class Array
 public:
 	Array(void);
 	Array(unsigned int n);
-	Array(Array &obj);
-	Array	&operator=(Array &obj);
+	Array(const Array &obj);
+	Array	&operator=(const Array &obj);
 	T		&operator[](int idx);
 	~Array(void);
 	unsigned int size(void) const;
@@ -34,7 +33,7 @@ Array<T>::Array(unsigned int n)
 }
 
 template<class T>
-Array<T>::Array(Array &obj)
+Array<T>::Array(const Array &obj)
 {
 	this->_size = obj.size();
 	this->addr = new T[this->_size];
@@ -42,11 +41,10 @@ Array<T>::Array(Array &obj)
 	{
 		this->addr[i] = obj.addr[i];
 	}
-	//operator=(obj);
 }
 
-template<class T>
-Array<T> &Array<T>::operator=(Array &obj)
+template<typename T>
+Array<T> &Array<T>::operator=(const Array &obj)
 {
 	this->_size = obj.size();
 	delete[] this->addr;
@@ -61,10 +59,10 @@ Array<T> &Array<T>::operator=(Array &obj)
 template<class T>
 T	&Array<T>::operator[](int idx)
 {
-	if (idx < 0 || idx >= (int)this->size())
-	{
-		throw std::out_of_range("index is out of bounds fuck you!");
-	}
+	if (idx < 0)
+		throw std::underflow_error("underflow_error");
+	if (idx >= (int)this->size())
+		throw std::overflow_error("overflow_error");
 	return this->addr[idx];
 }
 

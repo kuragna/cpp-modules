@@ -23,6 +23,8 @@ public:
 
 	char peak(void) const;
 	bool isToken(int t) const;
+	
+
 	bool isEnd(void) const;
 	void trim(void);
 	std::string next(void);

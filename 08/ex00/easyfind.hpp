@@ -2,14 +2,12 @@
 #define EASY_FIND_HPP
 
 #include <iostream>
+#include <algorithm>
 
-// TODO: needs to return a reference of `T`
-// NOTE: dont use indeces
-template<typename T>
-int	easyfind(T &c, int value)
+template<class T>
+typename T::iterator easyfind(T &c, const int &value)
 {
-	if (std::find(c.begin(), c.end(), value) != c.end())
-		return value;
-	throw std::runtime_error("has not found");
+	return std::find(c.begin(), c.end(), value);
 }
+
 #endif  // EASY_FIND_HPP

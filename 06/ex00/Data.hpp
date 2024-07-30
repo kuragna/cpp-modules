@@ -5,19 +5,17 @@
 #include <limits>
 #include <iostream>
 #include <iomanip>
-
 #include <cmath>
 #include <cstdlib>
-#include <cstring>
 
 class Data
 {
 	std::string str;
 	int	countDecimalNumber;
 	int	count;
-	static const char *types[5];
 	enum Type { CHAR, INT, FLOAT, DOUBLE, NONE };
 	Type type;
+	static const char *types[5];
 public:
 	Data(const std::string &str);
 

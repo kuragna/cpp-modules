@@ -43,6 +43,19 @@ int main()
 {
 	std::srand(time(NULL)); // to get differente random number from prev one
 	
+	A a;
+	identify(a);
+	std::cout << "--------------" << std::endl;
+
+	// using reference
+	B b;
+	identify(&b);
+	std::cout << "--------------" << std::endl;
+
+	C c;
+	identify(c);
+	std::cout << "--------------" << std::endl;
+	
 	// create random object of A, B, or C.
 	for (int i = 0; i < 10; i += 1)
 	{

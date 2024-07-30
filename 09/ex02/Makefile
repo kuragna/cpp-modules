@@ -1,15 +1,22 @@
 NAME		= PmergeMe
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp PmergeMe.cpp
+OBJ			= $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC)
-	c++ -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
+%.o: %.cpp
+	c++ -c $< $(CPPFLAGS) -o $@
 
-fclean:
+$(NAME): $(OBJ)
+	c++ -o $@ $(CPPFLAGS) $(OBJ)
+
+clean:
+	rm -fr $(OBJ)
+
+fclean: clean
 	rm -fr $(NAME)
 
 re: fclean all
 
-.PHONY: all fclean re
+.PHONY: all fclean re clean

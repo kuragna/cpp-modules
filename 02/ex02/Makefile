@@ -1,6 +1,6 @@
 NAME		=	a.out
 CC			=	c++
-CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98
+CPPFLAGS	=	-Wall -Werror -Wextra #-std=c++98
 RM			=	rm -fr
 SRC			=	main.cpp Fixed.cpp
 

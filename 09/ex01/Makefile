@@ -1,5 +1,5 @@
 NAME		= RPN
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb -fsanitize=address
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp RPN.cpp
 OBJ			= $(SRC:.cpp=.o)
 

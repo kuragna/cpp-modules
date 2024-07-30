@@ -1,5 +1,5 @@
 NAME		= a.out
-CPPFLAGS	= -std=c++98  -Wall -Werror -Wextra #-fsanitize=address
+CPPFLAGS	= -std=c++98  -Wall -Werror -Wextra
 SRC			= main.cpp
 
 all: $(NAME)

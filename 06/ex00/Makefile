@@ -1,6 +1,6 @@
 NAME		= convert
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb -fsanitize=address #-fsanitize=undefined
-SRC			= main.cpp ScalarConverter.cpp Data.cpp
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb -fsanitize=address
+SRC			= main.cpp  Data.cpp ScalarConverter.cpp
 
 all: $(NAME)
 

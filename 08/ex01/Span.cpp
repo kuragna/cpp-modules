@@ -15,8 +15,9 @@ Span::Span(const Span &s)
 
 Span	&Span::operator=(const Span &s)
 {
-	this->size  = s.size;
-	this->items = s.items;
+	this->isSorted = s.isSorted;
+	this->size     = s.size;
+	this->items    = s.items;
 	return *this;
 }
 

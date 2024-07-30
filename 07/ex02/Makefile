@@ -1,11 +1,11 @@
 NAME		= a.out
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb #-fsanitize=address
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp 
 
 all: $(NAME)
 
 $(NAME): $(SRC) Array.hpp
-	c++ -o $@ $(CPPFLAGS) $(filter %.cpp, $^)
+	c++ -o $@ $(CPPFLAGS) $(SRC)
 
 fclean:
 	rm -fr $(NAME)

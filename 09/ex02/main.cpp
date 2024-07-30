@@ -2,7 +2,6 @@
 
 int main(int argc, char **argv)
 {
-	std::cout << std::boolalpha;
 	if (argc <= 1)
 	{
 		std::cout << "Error: invalid arguments" << std::endl;
@@ -14,7 +13,7 @@ int main(int argc, char **argv)
 		pm.info();
 	} catch (std::exception &e)
 	{
-		std::cout << "Error" << std::endl;
+		std::cout << e.what() << std::endl;
 		return 1;
 	}
 	return 0;

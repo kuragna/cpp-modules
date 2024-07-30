@@ -1,5 +1,4 @@
 #include "Data.hpp"
-#include <cmath>
 
 const char *Data::types[] = {"char", "int", "float", "double", "none"};
 
@@ -66,10 +65,8 @@ Data::Type Data::getType(void)
 		type = CHAR;
 	else
 		type = isFloat();
-	std::cout << "type -> " << types[type] << std::endl;
 	return type;
 }
-
 
 void Data::Char(long chr)
 {
@@ -87,7 +84,7 @@ void Data::Char(long chr)
 			str += "'";
 		}
 	}
-	std::cout << types[this->type] << ": " << str << std::endl;
+	std::cout << types[CHAR] << ": " << str << std::endl;
 }
 
 void	Data::Double(double d)

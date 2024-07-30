@@ -1,5 +1,5 @@
 NAME		= btc
-CPPFLAGS	= -Wall -Werror -Wextra -std=c++98 -ggdb -fsanitize=address
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp BitcoinExchange.cpp
 OBJ			= $(SRC:.cpp=.o)
 

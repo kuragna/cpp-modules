@@ -7,16 +7,15 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <cctype>
-#include <ctime>
 
 class PmergeMe
 {
 	typedef void (PmergeMe::*fpSort)(void);
 
-	std::vector<int> vec;
-	std::list<int>   lst;
-	int	last;
+	std::vector<unsigned int> vec;
+	std::list<unsigned int>   lst;
+	bool oddFlag;
+	unsigned int	last;
 	double timestamps[2];
 
 
@@ -34,7 +33,7 @@ public:
 	void	sortVector(void);
 	void	sortList(void);
 
-	double  time(std::clock_t start, std::clock_t end);
+	double  time(clock_t start, clock_t end);
 
 	void	print(const char *str, double time, size_t size);
 	void	info(void);

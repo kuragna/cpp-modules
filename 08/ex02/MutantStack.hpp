@@ -5,7 +5,6 @@
 #include <deque>
 #include <stack>
 
-
 template<class T>
 class MutantStack : public std::stack<T>
 {
